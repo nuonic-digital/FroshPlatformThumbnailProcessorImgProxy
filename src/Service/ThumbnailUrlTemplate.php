@@ -51,7 +51,7 @@ class ThumbnailUrlTemplate implements ThumbnailUrlTemplateInterface
      * @param string $width
      * @param string $height
      */
-    public function getUrl($mediaUrl, $mediaPath, $width, $height): string
+    public function getUrl($mediaUrl, $mediaPath, $width, $height = ''): string
     {
         $keyBin = pack('H*', $this->key);
         $saltBin = pack('H*', $this->salt);
