@@ -63,7 +63,7 @@ class ThumbnailUrlTemplate implements ThumbnailUrlTemplateInterface
         $extension = pathinfo($mediaPath, PATHINFO_EXTENSION);
         $encodedUrl = rtrim(strtr(base64_encode($mediaUrl . '/' . $mediaPath), '+/', '-_'), '=');
 
-        $path = "/{$this->resizingType}/{$width}/{$height}/{$this->gravity}/{$this->enlarge}/{$encodedUrl}.{$extension}";
+        $path = "/rs:{$this->resizingType}:{$width}:{$height}/g:{$this->gravity}/{$encodedUrl}.{$extension}";
         $signature = hash_hmac('sha256', $saltBin . $path, $keyBin, true);
 
         if ($this->signatureSize !== 32) {
