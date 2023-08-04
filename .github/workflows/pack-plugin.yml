@@ -1,0 +1,13 @@
+name: DeployPlugin
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    uses: FriendsOfShopware/actions/.github/workflows/github.yml@main
+    with:
+      extensionName: ${{ github.event.repository.name }}
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
