@@ -10,4 +10,4 @@ jobs:
     with:
       extensionName: ${{ github.event.repository.name }}
     secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      ghToken: ${{ secrets.GITHUB_TOKEN }}
