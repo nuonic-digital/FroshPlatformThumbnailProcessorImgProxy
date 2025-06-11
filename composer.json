@@ -1,5 +1,5 @@
 {
-    "name": "frosh/platform-thumbnail-processor-secure-imgproxy",
+    "name": "nuonic/platform-thumbnail-processor-secure-imgproxy",
     "keywords": [
         "shopware",
         "backend",
@@ -18,6 +18,10 @@
         {
             "name": "FriendsOfShopware",
             "homepage": "https://friendsofshopware.de"
+        },
+        {
+            "name": "nuonic Digital GmbH & Co. KG",
+            "homepage": "https://nuonic.de"
         }
     ],
     "require": {
@@ -25,7 +29,7 @@
         "shopware/core": "~6.6.0"
     },
     "extra": {
-        "shopware-plugin-class": "Frosh\\ThumbnailProcessorImgProxy\\FroshPlatformThumbnailProcessorImgProxy",
+        "shopware-plugin-class": "Nuonic\\ThumbnailProcessorImgProxy\\NuonicPlatformThumbnailProcessorImgProxy",
         "label": {
             "de-DE": "ThumbnailProcessorImgProxy Addon",
             "en-GB": "ThumbnailProcessorImgProxy Addon"
@@ -37,7 +41,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Frosh\\ThumbnailProcessorImgProxy\\": "src/"
+            "Nuonic\\ThumbnailProcessorImgProxy\\": "src/"
         }
     }
 }

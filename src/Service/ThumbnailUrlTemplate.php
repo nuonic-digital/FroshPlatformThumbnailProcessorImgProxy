@@ -1,36 +1,26 @@
 <?php declare(strict_types=1);
 
-namespace Frosh\ThumbnailProcessorImgProxy\Service;
+namespace Nuonic\ThumbnailProcessorImgProxy\Service;
 
 use Frosh\ThumbnailProcessor\Service\ThumbnailUrlTemplateInterface;
 use Shopware\Core\System\SystemConfig\SystemConfigService;
 
 class ThumbnailUrlTemplate implements ThumbnailUrlTemplateInterface
 {
-    /** @var string */
     private string $domain;
 
-    /** @var string */
     private string $key;
 
-    /** @var string */
     private string $salt;
 
-    /** @var string */
     private string $resizingType;
 
-    /** @var string */
     private string $gravity;
 
-    /** @var int */
     private int $signatureSize;
 
-    /** @var bool */
     private bool $omitExtension = false;
 
-    /**
-     * @var ThumbnailUrlTemplateInterface
-     */
     private ThumbnailUrlTemplateInterface $parent;
 
     public function __construct(SystemConfigService $systemConfigService, ThumbnailUrlTemplateInterface $parent)
@@ -63,7 +53,7 @@ class ThumbnailUrlTemplate implements ThumbnailUrlTemplateInterface
         $extension = pathinfo($mediaPath, PATHINFO_EXTENSION);
         $encodedUrl = rtrim(strtr(base64_encode($mediaUrl . '/' . $mediaPath), '+/', '-_'), '=');
 
-        $timestamp = $mediaUpdatedAt->getTimestamp();
+        $timestamp = $mediaUpdatedAt?->getTimestamp() ?? 0;
 
         $path = "/rs:{$this->resizingType}:{$width}/g:{$this->gravity}/cb:{$timestamp}/{$encodedUrl}" . ($this->omitExtension ? '' : ".{$extension}");
         $signature = hash_hmac('sha256', $saltBin . $path, $keyBin, true);
