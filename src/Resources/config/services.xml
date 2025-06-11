@@ -6,7 +6,7 @@
     <services>
         <service id="Nuonic\ThumbnailProcessorImgProxy\Service\ThumbnailUrlTemplate" decorates="Frosh\ThumbnailProcessor\Service\ThumbnailUrlTemplateInterface">
             <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
-            <argument type="service" id="Frosh\ThumbnailProcessorImgProxy\Service\ThumbnailUrlTemplate.inner"/>
+            <argument type="service" id="Nuonic\ThumbnailProcessorImgProxy\Service\ThumbnailUrlTemplate.inner"/>
         </service>
     </services>
 </container>
