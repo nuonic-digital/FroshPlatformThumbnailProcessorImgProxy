@@ -35,11 +35,11 @@
             <placeholder>sm</placeholder>
         </input-field>
 
-        <input-field type="bool">
-            <name>enlarge</name>
-            <label>enlarge</label>
-            <defaultValue>0</defaultValue>
-            <placeholder>0</placeholder>
+        <input-field type="checkbox">
+            <name>omitExtension</name>
+            <label>Omit Extension (Auto Format / Encode)</label>
+            <defaultValue>false</defaultValue>
+            <placeholder>false</placeholder>
         </input-field>
 
         <input-field type="int">
@@ -48,6 +48,5 @@
             <defaultValue>32</defaultValue>
             <placeholder>32</placeholder>
         </input-field>
-
     </card>
 </config>

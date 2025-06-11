@@ -25,6 +25,9 @@ class ThumbnailUrlTemplate implements ThumbnailUrlTemplateInterface
     /** @var int */
     private int $signatureSize;
 
+    /** @var bool */
+    private bool $omitExtension = false;
+
     /**
      * @var ThumbnailUrlTemplateInterface
      */
@@ -32,12 +35,13 @@ class ThumbnailUrlTemplate implements ThumbnailUrlTemplateInterface
 
     public function __construct(SystemConfigService $systemConfigService, ThumbnailUrlTemplateInterface $parent)
     {
-        $this->domain = $systemConfigService->get('FroshPlatformThumbnailProcessorImgProxy.config.domain');
-        $this->key = $systemConfigService->get('FroshPlatformThumbnailProcessorImgProxy.config.imgproxykey');
-        $this->salt = $systemConfigService->get('FroshPlatformThumbnailProcessorImgProxy.config.imgproxysalt');
-        $this->resizingType = $systemConfigService->get('FroshPlatformThumbnailProcessorImgProxy.config.resizingType') ?: 'fit';
-        $this->gravity = $systemConfigService->get('FroshPlatformThumbnailProcessorImgProxy.config.gravity') ?: 'sm';
-        $this->signatureSize = $systemConfigService->get('FroshPlatformThumbnailProcessorImgProxy.config.signatureSize') ?: 32;
+        $this->domain = $systemConfigService->getString('FroshPlatformThumbnailProcessorImgProxy.config.domain');
+        $this->key = $systemConfigService->getString('FroshPlatformThumbnailProcessorImgProxy.config.imgproxykey');
+        $this->salt = $systemConfigService->getString('FroshPlatformThumbnailProcessorImgProxy.config.imgproxysalt');
+        $this->resizingType = $systemConfigService->getString('FroshPlatformThumbnailProcessorImgProxy.config.resizingType') ?: 'fit';
+        $this->gravity = $systemConfigService->getString('FroshPlatformThumbnailProcessorImgProxy.config.gravity') ?: 'sm';
+        $this->signatureSize = $systemConfigService->getInt('FroshPlatformThumbnailProcessorImgProxy.config.signatureSize') ?: 32;
+        $this->omitExtension = $systemConfigService->getBool('FroshPlatformThumbnailProcessorImgProxy.config.omitExtension') ?: false;
         $this->parent = $parent;
     }
 
@@ -59,7 +63,9 @@ class ThumbnailUrlTemplate implements ThumbnailUrlTemplateInterface
         $extension = pathinfo($mediaPath, PATHINFO_EXTENSION);
         $encodedUrl = rtrim(strtr(base64_encode($mediaUrl . '/' . $mediaPath), '+/', '-_'), '=');
 
-        $path = "/rs:{$this->resizingType}:{$width}/g:{$this->gravity}/{$encodedUrl}.{$extension}?t=" . $mediaUpdatedAt->getTimestamp();
+        $timestamp = $mediaUpdatedAt->getTimestamp();
+
+        $path = "/rs:{$this->resizingType}:{$width}/g:{$this->gravity}/cb:{$timestamp}/{$encodedUrl}" . ($this->omitExtension ? '' : ".{$extension}");
         $signature = hash_hmac('sha256', $saltBin . $path, $keyBin, true);
 
         if ($this->signatureSize !== 32) {
