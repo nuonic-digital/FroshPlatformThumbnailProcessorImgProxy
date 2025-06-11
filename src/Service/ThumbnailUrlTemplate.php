@@ -25,13 +25,13 @@ class ThumbnailUrlTemplate implements ThumbnailUrlTemplateInterface
 
     public function __construct(SystemConfigService $systemConfigService, ThumbnailUrlTemplateInterface $parent)
     {
-        $this->domain = $systemConfigService->getString('FroshPlatformThumbnailProcessorImgProxy.config.domain');
-        $this->key = $systemConfigService->getString('FroshPlatformThumbnailProcessorImgProxy.config.imgproxykey');
-        $this->salt = $systemConfigService->getString('FroshPlatformThumbnailProcessorImgProxy.config.imgproxysalt');
-        $this->resizingType = $systemConfigService->getString('FroshPlatformThumbnailProcessorImgProxy.config.resizingType') ?: 'fit';
-        $this->gravity = $systemConfigService->getString('FroshPlatformThumbnailProcessorImgProxy.config.gravity') ?: 'sm';
-        $this->signatureSize = $systemConfigService->getInt('FroshPlatformThumbnailProcessorImgProxy.config.signatureSize') ?: 32;
-        $this->omitExtension = $systemConfigService->getBool('FroshPlatformThumbnailProcessorImgProxy.config.omitExtension') ?: false;
+        $this->domain = $systemConfigService->getString('NuonicPlatformThumbnailProcessorImgProxy.config.domain');
+        $this->key = $systemConfigService->getString('NuonicPlatformThumbnailProcessorImgProxy.config.imgproxykey');
+        $this->salt = $systemConfigService->getString('NuonicPlatformThumbnailProcessorImgProxy.config.imgproxysalt');
+        $this->resizingType = $systemConfigService->getString('NuonicPlatformThumbnailProcessorImgProxy.config.resizingType') ?: 'fit';
+        $this->gravity = $systemConfigService->getString('NuonicPlatformThumbnailProcessorImgProxy.config.gravity') ?: 'sm';
+        $this->signatureSize = $systemConfigService->getInt('NuonicPlatformThumbnailProcessorImgProxy.config.signatureSize') ?: 32;
+        $this->omitExtension = $systemConfigService->getBool('NuonicPlatformThumbnailProcessorImgProxy.config.omitExtension') || false;
         $this->parent = $parent;
     }
 
