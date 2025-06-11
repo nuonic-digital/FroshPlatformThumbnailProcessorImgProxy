@@ -1,0 +1,12 @@
+# 2.0.0
+- [fix(build): commit extension config](https://github.com/nuonic-digital/NuonicPlatformThumbnailProcessorImgProxy/commit/8835953)
+- [config(composer): fix composer.json issues](https://github.com/nuonic-digital/NuonicPlatformThumbnailProcessorImgProxy/commit/2433c6c)
+- [feat(plugin): clean up plugin](https://github.com/nuonic-digital/NuonicPlatformThumbnailProcessorImgProxy/commit/1f8e64d)
+- [feat(config): enable auto mime type mode](https://github.com/nuonic-digital/NuonicPlatformThumbnailProcessorImgProxy/commit/dff8aa7)
+- [fix: compatibility](https://github.com/nuonic-digital/NuonicPlatformThumbnailProcessorImgProxy/commit/a7fcfe7)
+- [chore: add shopware/core to requirements](https://github.com/nuonic-digital/NuonicPlatformThumbnailProcessorImgProxy/commit/f27ebba)
+- [chore: correct secret for workflow](https://github.com/nuonic-digital/NuonicPlatformThumbnailProcessorImgProxy/commit/4b05d85)
+- [chore: add workflow to create release](https://github.com/nuonic-digital/NuonicPlatformThumbnailProcessorImgProxy/commit/fd6412c)
+- [feat: support imgproxy v3](https://github.com/nuonic-digital/NuonicPlatformThumbnailProcessorImgProxy/commit/28a2067)
+- [fix: update ThumbnailUrlTemplate to support newer versions](https://github.com/nuonic-digital/NuonicPlatformThumbnailProcessorImgProxy/commit/3b35f5d)
+- [add plugin-icon](https://github.com/nuonic-digital/NuonicPlatformThumbnailProcessorImgProxy/commit/6f59b88)
