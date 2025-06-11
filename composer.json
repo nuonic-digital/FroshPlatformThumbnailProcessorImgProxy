@@ -28,6 +28,11 @@
         "frosh/platform-thumbnail-processor": "^5.3.0",
         "shopware/core": "~6.6.0"
     },
+    "require-dev": {
+        "phpstan/phpstan": "^2.1.2",
+        "friendsofphp/php-cs-fixer": "^3.66",
+        "shopwarelabs/phpstan-shopware": "^0.1.8"
+    },
     "extra": {
         "shopware-plugin-class": "Nuonic\\ThumbnailProcessorImgProxy\\NuonicPlatformThumbnailProcessorImgProxy",
         "label": {
@@ -50,6 +55,11 @@
     "autoload": {
         "psr-4": {
             "Nuonic\\ThumbnailProcessorImgProxy\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/runtime": true
         }
     }
 }
