@@ -10,7 +10,7 @@
         "storage",
         "thumbnail"
     ],
-    "description": "This plugins allows you to use secured imgproxy in thumbnail processor",
+    "description": "This plugin allows you to use a secured imgproxy integration in the Shopware thumbnail processor, enabling signed URLs and enhanced media delivery options.",
     "version": "2.0.0",
     "type": "shopware-platform-plugin",
     "license": "MIT",
@@ -35,8 +35,16 @@
             "en-GB": "ThumbnailProcessorImgProxy Addon"
         },
         "description": {
-            "de-DE": "This plugins allows you to use secured imgproxy in thumbnail processor",
-            "en-GB": "This plugins allows you to use secured imgproxy in thumbnail processor"
+            "de-DE": "Dieses Plugin ermöglicht die Integration eines gesicherten imgproxy-Dienstes in den Shopware Thumbnail-Processor und erlaubt so die Nutzung von signierten Bild-URLs.",
+            "en-GB": "This plugin enables the integration of a secured imgproxy service into the Shopware thumbnail processor and allows the use of signed image URLs for enhanced media security."
+        },
+        "manufacturerLink": {
+            "de-DE": "https://nuonic.de",
+            "en-GB": "https://nuonic.de"
+        },
+        "supportLink": {
+            "de-DE": "https://nuonic.de/kontakt",
+            "en-GB": "https://nuonic.de/en/contact"
         }
     },
     "autoload": {
