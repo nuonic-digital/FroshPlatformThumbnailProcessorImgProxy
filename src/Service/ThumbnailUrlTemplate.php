@@ -8,39 +8,35 @@ use Shopware\Core\System\SystemConfig\SystemConfigService;
 class ThumbnailUrlTemplate implements ThumbnailUrlTemplateInterface
 {
     /** @var string */
-    private $domain;
+    private string $domain;
 
     /** @var string */
-    private $key;
+    private string $key;
 
     /** @var string */
-    private $salt;
+    private string $salt;
 
     /** @var string */
-    private $resizingType;
+    private string $resizingType;
 
     /** @var string */
-    private $gravity;
+    private string $gravity;
 
     /** @var int */
-    private $enlarge;
-
-    /** @var int */
-    private $signatureSize;
+    private int $signatureSize;
 
     /**
      * @var ThumbnailUrlTemplateInterface
      */
-    private $parent;
+    private ThumbnailUrlTemplateInterface $parent;
 
     public function __construct(SystemConfigService $systemConfigService, ThumbnailUrlTemplateInterface $parent)
     {
-        $this->domain = $systemConfigService->get('FroshPlatformThumbnailProcessorImgProxy.config.Domain');
+        $this->domain = $systemConfigService->get('FroshPlatformThumbnailProcessorImgProxy.config.domain');
         $this->key = $systemConfigService->get('FroshPlatformThumbnailProcessorImgProxy.config.imgproxykey');
         $this->salt = $systemConfigService->get('FroshPlatformThumbnailProcessorImgProxy.config.imgproxysalt');
         $this->resizingType = $systemConfigService->get('FroshPlatformThumbnailProcessorImgProxy.config.resizingType') ?: 'fit';
         $this->gravity = $systemConfigService->get('FroshPlatformThumbnailProcessorImgProxy.config.gravity') ?: 'sm';
-        $this->enlarge = $systemConfigService->get('FroshPlatformThumbnailProcessorImgProxy.config.enlarge') ?: 0;
         $this->signatureSize = $systemConfigService->get('FroshPlatformThumbnailProcessorImgProxy.config.signatureSize') ?: 32;
         $this->parent = $parent;
     }
@@ -51,19 +47,19 @@ class ThumbnailUrlTemplate implements ThumbnailUrlTemplateInterface
      * @param string $width
      * @param string $height
      */
-    public function getUrl($mediaUrl, $mediaPath, $width, $height = ''): string
+    public function getUrl(string $mediaUrl, string $mediaPath, string $width, ?\DateTimeInterface $mediaUpdatedAt): string
     {
         $keyBin = pack('H*', $this->key);
         $saltBin = pack('H*', $this->salt);
 
         if (empty($keyBin) || empty($saltBin)) {
-            return $this->parent->getUrl($mediaUrl, $mediaPath, $width, $height);
+            return $this->parent->getUrl($mediaUrl, $mediaPath, $width, $mediaUpdatedAt);
         }
 
         $extension = pathinfo($mediaPath, PATHINFO_EXTENSION);
         $encodedUrl = rtrim(strtr(base64_encode($mediaUrl . '/' . $mediaPath), '+/', '-_'), '=');
 
-        $path = "/rs:{$this->resizingType}:{$width}:{$height}/g:{$this->gravity}/{$encodedUrl}.{$extension}";
+        $path = "/rs:{$this->resizingType}:{$width}/g:{$this->gravity}/{$encodedUrl}.{$extension}?t=" . $mediaUpdatedAt->getTimestamp();
         $signature = hash_hmac('sha256', $saltBin . $path, $keyBin, true);
 
         if ($this->signatureSize !== 32) {

@@ -6,7 +6,7 @@
         <title>Configuration</title>
 
         <input-field>
-            <name>Domain</name>
+            <name>domain</name>
             <label>Domain</label>
             <placeholder>https://imgproxy.example.com/</placeholder>
         </input-field>
