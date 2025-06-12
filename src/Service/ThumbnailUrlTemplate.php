@@ -21,6 +21,8 @@ class ThumbnailUrlTemplate implements ThumbnailUrlTemplateInterface
 
     private bool $omitExtension = false;
 
+    private bool $enlarge = false;
+
     private ThumbnailUrlTemplateInterface $parent;
 
     public function __construct(SystemConfigService $systemConfigService, ThumbnailUrlTemplateInterface $parent)
@@ -31,6 +33,7 @@ class ThumbnailUrlTemplate implements ThumbnailUrlTemplateInterface
         $this->resizingType = $systemConfigService->getString('NuonicPlatformThumbnailProcessorImgProxy.config.resizingType') ?: 'fit';
         $this->gravity = $systemConfigService->getString('NuonicPlatformThumbnailProcessorImgProxy.config.gravity') ?: 'sm';
         $this->signatureSize = $systemConfigService->getInt('NuonicPlatformThumbnailProcessorImgProxy.config.signatureSize') ?: 32;
+        $this->enlarge = $systemConfigService->get('NuonicPlatformThumbnailProcessorImgProxy.config.enlarge') || false;
         $this->omitExtension = $systemConfigService->getBool('NuonicPlatformThumbnailProcessorImgProxy.config.omitExtension') || false;
         $this->parent = $parent;
     }
@@ -54,8 +57,9 @@ class ThumbnailUrlTemplate implements ThumbnailUrlTemplateInterface
         $encodedUrl = rtrim(strtr(base64_encode($mediaUrl . '/' . $mediaPath), '+/', '-_'), '=');
 
         $timestamp = $mediaUpdatedAt?->getTimestamp() ?? 0;
+        $enlarge = $this->enlarge ? '1' : '0';
 
-        $path = "/rs:{$this->resizingType}:{$width}/g:{$this->gravity}/cb:{$timestamp}/{$encodedUrl}" . ($this->omitExtension ? '' : ".{$extension}");
+        $path = "/rs:{$this->resizingType}:{$width}:0:{$enlarge}/g:{$this->gravity}/cb:{$timestamp}/{$encodedUrl}" . ($this->omitExtension ? '' : ".{$extension}");
         $signature = hash_hmac('sha256', $saltBin . $path, $keyBin, true);
 
         if ($this->signatureSize !== 32) {

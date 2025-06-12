@@ -39,7 +39,12 @@
             <name>omitExtension</name>
             <label>Omit Extension (Auto Format / Encode)</label>
             <defaultValue>false</defaultValue>
-            <placeholder>false</placeholder>
+        </input-field>
+
+        <input-field type="bool">
+            <name>enlarge</name>
+            <label>enlarge</label>
+            <defaultValue>false</defaultValue>
         </input-field>
 
         <input-field type="int">
